@@ -1,0 +1,100 @@
+{
+  "ouvrages": [
+    {
+      "ISBN": "734-6-6258-3454-5",
+      "editeur": {
+        "nom": "labore occaecat in adipisicing dolor",
+        "webSiteURL": "id in labore aliqua dolore",
+        "collections": [
+          {
+            "nom": "in aliquip quis ea sit",
+            "collectionParent": {
+              "nom": "Collection parent"
+            }
+          },
+          {
+            "nom": "reprehenderit"
+          },
+          {
+            "nom": "fugiat ex"
+          },
+          {
+            "nom": "sit Excepteur ut",
+            "collectionParent": {
+              "nom": "Collection parent"
+            }
+          }
+        ],
+        "maisonMere": {
+          "nom": "aliquip",
+          "webSiteURL": "do laboris ipsum",
+          "maisonMere": {
+            "nom": "velit",
+            "webSiteURL": "mollit sint"
+          },
+          "logo": [
+            "veniam ea sunt",
+            "in",
+            "dolore sunt irure"
+          ]
+        },
+        "logo": [
+          "anim eu nulla deserunt do",
+          "laboris labore ex voluptate",
+          "Excepteur et consequat eiusmod proident",
+          "sit ullamco"
+        ],
+        "coordonnees": {
+          "adresse": {
+            "ligne1": "adipisicing",
+            "ligne4": "tempor sit veniam",
+            "ligne6": "15938 7aXkkCbXAg8",
+            "ligne3": "ut reprehenderit Ut",
+            "ligne5": "do incididunt cillum",
+            "ligne2": "consequat irure adipisicing incididunt qui"
+          },
+          "adressesMails": [
+            "quis sunt reprehenderit ea cupidatat",
+            "amet sunt Lorem veniam nostrud",
+            "proident laboris in commodo laborum",
+            "consectetur aliquip ullamco nostrud eiusmod",
+            "elit commodo dolor"
+          ]
+        }
+      },
+      "resume": "elit culpa",
+      "titre": "consequat aliqua exercitation",
+      "reference": "eu",
+      "auteurs": [
+        {
+          "nom": "in minim"
+        },
+        {
+          "nom": "sed ut"
+        },
+        {
+          "nom": "ullamco dolore amet dolor",
+          "naissance": "yyyyMMdd",
+          "biographie": "Duis",
+          "prenom": "in irure nulla",
+          "nationalite": "BWA",
+          "deces": "yyyyMMdd"
+        },
+        {
+          "nom": "sit",
+          "nationalite": "ESP",
+          "deces": "yyyyMMdd"
+        }
+      ],
+      "EAN": "57990211302463",
+      "premiereDeCouverture": [
+        "do voluptate reprehenderit esse",
+        "adipisicing commodo ut aliqua"
+      ],
+      "parution": "yyyyMMdd",
+      "collection": {
+        "nom": "ullamco cillum"
+      }
+    }
+  ]
+}

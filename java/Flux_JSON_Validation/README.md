@@ -101,7 +101,7 @@ Avec Maven (Cf. la [documentation officielle](https://victools.github.io/jsonsch
 
 ##### @ runtime
 
-Ajout de la dépendance (Maven) dans la section <DependencyManagement /> avec le scope import : 
+Ajout de la dépendance (Maven) dans la section `<DependencyManagement />` avec le scope import : 
 ```XML
     <dependency>
         <groupId>com.github.victools</groupId>
@@ -148,6 +148,7 @@ Code Java :
     (...)
 ```
 
+Exemple de schéma JSON généré [ici](./json-validation/src/main/resources/schemas/Librairie.schema.json).
 
 #### Validation
 
@@ -173,5 +174,5 @@ Code Java :
     return schema.validate(node);
 ```
 
-
+Projet exemple [ici](./json-validation/).
 
