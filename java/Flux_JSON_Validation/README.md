@@ -25,12 +25,12 @@ Validation :
 
 | JSON Schéma spec version -> | 2020-12 | 2019-09 (Draft 08) | Draft-07 | Draft-06 | Oldest |
 |-----|-----|-----|-----|-----|-----|
-| [Snow](https://github.com/ssilverman/snowy-json) | :white_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :white_check_mark: |
-| [Vert.x Json Schema](https://github.com/eclipse-vertx/vertx-json-schema) | :white_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :white_check_mark: | :white_check_mark: |
-| [everit.org](https://github.com/everit-org/json-schema) | :white_check_mark: | :white_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
-| [Justify](https://github.com/leadpony/justify) | :white_check_mark: | :white_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
-| [networknt/json-schema-validator](https://github.com/networknt/json-schema-validator) | :white_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
-| [jsonschemafriend](https://github.com/jimblackler/jsonschemafriend) | :white_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+| [Snow](https://github.com/ssilverman/snowy-json) | :heavy_multiplication_x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :heavy_multiplication_x: |
+| [Vert.x Json Schema](https://github.com/eclipse-vertx/vertx-json-schema) | :heavy_multiplication_x: | :white_check_mark: | :white_check_mark: | :heavy_multiplication_x: | :heavy_multiplication_x: |
+| [everit.org](https://github.com/everit-org/json-schema) | :heavy_multiplication_x: | :heavy_multiplication_x: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| [Justify](https://github.com/leadpony/justify) | :heavy_multiplication_x: | :heavy_multiplication_x: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| [networknt/json-schema-validator](https://github.com/networknt/json-schema-validator) | :heavy_multiplication_x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| [jsonschemafriend](https://github.com/jimblackler/jsonschemafriend) | :heavy_multiplication_x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 
 Les librairies retenues pour :
 - la **génération** du schéma JSON : 
