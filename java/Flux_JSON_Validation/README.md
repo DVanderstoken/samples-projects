@@ -103,43 +103,49 @@ Avec Maven (Cf. la [documentation officielle](https://victools.github.io/jsonsch
 
 Ajout de la dépendance (Maven) dans la section <DependencyManagement /> avec le scope import : 
 ```XML
-        <dependency>
-            <groupId>com.github.victools</groupId>
-            <artifactId>jsonschema-generator-parent</artifactId>
-            <version>{jsonschema-generator-parent.version}</version>
-        </dependency>
+    <dependency>
+        <groupId>com.github.victools</groupId>
+        <artifactId>jsonschema-generator-parent</artifactId>
+        <version>{jsonschema-generator-parent.version}</version>
+    </dependency>
 ```
 
 ou des dépendances explicites (core et module(s)) :
 ```XML
-        <dependency>
-            <groupId>com.github.victools</groupId>
-            <artifactId>jsonschema-generator</artifactId>
-            <version>{jsonschema-generator.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.victools</groupId>
-            <artifactId>jsonschema-module-jackson</artifactId>
-            <version>{jsonschema-generator.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.victools</groupId>
-            <artifactId>jsonschema-module-javax-validation</artifactId>
-            <version>{jsonschema-generator.version}</version>
-        </dependency>
+    <dependency>
+        <groupId>com.github.victools</groupId>
+        <artifactId>jsonschema-generator</artifactId>
+        <version>{jsonschema-generator.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>com.github.victools</groupId>
+        <artifactId>jsonschema-module-jackson</artifactId>
+        <version>{jsonschema-generator.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>com.github.victools</groupId>
+        <artifactId>jsonschema-module-javax-validation</artifactId>
+        <version>{jsonschema-generator.version}</version>
+    </dependency>
 ```
 
 Code Java : 
 ```java
-        (...)
-        JavaxValidationModule javaxValidationModule = new JavaxValidationModule(JavaxValidationOption.INCLUDE_PATTERN_EXPRESSIONS);
-        JacksonModule jacksonModule = new JacksonModule(JacksonOption.RESPECT_JSONPROPERTY_REQUIRED, JacksonOption.FLATTENED_ENUMS_FROM_JSONVALUE);
-        SchemaGeneratorConfigBuilder builder = new SchemaGeneratorConfigBuilder(SchemaVersion.DRAFT_2019_09, OptionPreset.PLAIN_JSON).with(Option.PLAIN_DEFINITION_KEYS,
-                Option.SCHEMA_VERSION_INDICATOR, Option.FORBIDDEN_ADDITIONAL_PROPERTIES_BY_DEFAULT).with(javaxValidationModule).with(jacksonModule);
-        SchemaGeneratorConfig config = builder.build();
-        SchemaGenerator generator = new SchemaGenerator(config);
-        JsonNode schema = generator.generateSchema(ClassName.class);
-        (...)
+    (...)
+    JavaxValidationModule javaxValidationModule = new JavaxValidationModule   (JavaxValidationOption.INCLUDE_PATTERN_EXPRESSIONS);
+    JacksonModule jacksonModule = new JacksonModule(JacksonOption.RESPECT_JSONPROPERTY_REQUIRED, 
+                                                    JacksonOption.FLATTENED_ENUMS_FROM_JSONVALUE);
+    SchemaGeneratorConfigBuilder builder = new SchemaGeneratorConfigBuilder(SchemaVersion.DRAFT_2019_09, 
+                                                                            OptionPreset.PLAIN_JSON)
+                                                .with(Option.PLAIN_DEFINITION_KEYS,
+                                                      Option.SCHEMA_VERSION_INDICATOR, 
+                                                      Option.FORBIDDEN_ADDITIONAL_PROPERTIES_BY_DEFAULT)
+                                                .with(javaxValidationModule)
+                                                .with(jacksonModule);
+    SchemaGeneratorConfig config = builder.build();
+    SchemaGenerator generator = new SchemaGenerator(config);
+    JsonNode schema = generator.generateSchema(ClassName.class);
+    (...)
 ```
 
 
@@ -149,20 +155,22 @@ Code Java :
 
 Ajout de la dépendance (Maven) : 
 ```XML
-        <dependency>
-            <groupId>com.networknt</groupId>
-            <artifactId>json-schema-validator</artifactId>
-            <version>{json-schema-validator.version}</version>
-        </dependency>
+    <dependency>
+        <groupId>com.networknt</groupId>
+        <artifactId>json-schema-validator</artifactId>
+        <version>{json-schema-validator.version}</version>
+    </dependency>
 ```
 
 Code Java : 
 ```java
-this.objectMapper = new ObjectMapper();
-        final JsonSchema schema = JsonSchemaFactory.builder(JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V201909)).objectMapper(this.objectMapper).build().getSchema(
-                jsonSchema);
-        final JsonNode node = this.objectMapper.readTree(jsonContent);
-        return schema.validate(node);
+    this.objectMapper = new ObjectMapper();
+    final JsonSchema schema = JsonSchemaFactory.builder(JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V201909))
+                                               .objectMapper(this.objectMapper)
+                                               .build()
+                                               .getSchema(jsonSchema);
+    final JsonNode node = this.objectMapper.readTree(jsonContent);
+    return schema.validate(node);
 ```
 
 
