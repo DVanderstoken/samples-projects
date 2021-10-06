@@ -8,6 +8,7 @@
     - [Génération du schéma :](#génération-du-schéma-)
       - [@ build time](#-build-time)
       - [@ runtime](#-runtime)
+      - [Cas particulier des dates](#cas-particulier-des-dates)
     - [Validation](#validation)
 
 ### Références : 
@@ -149,6 +150,30 @@ Code Java :
 ```
 
 Exemple de schéma JSON généré [ici](./json-validation/src/main/resources/schemas/Librairie.schema.json).
+
+##### Cas particulier des dates
+
+Le format d'échange JSON ne gère pas le type de données date, alors qu'il est courant de trouver des informations de ce type, idéalement typées avec l'API java.time de Java 8+.
+
+Par ailleurs, la JSR 303 (Validation API) ne fournit pas nativement de méthode de validation des dates.
+
+Partant de ce constat, il est possible :
+
+-de typer les propriétés représentant des dates en java.lang.String, ce qui permet de facto,
+- d'utiliser l'annotation @Pattern(regex = "yyyyMMdd"}, avec une regex contenant un format de Date valide
+
+Cette méthode à l'avantage de générer le schéma JSON correctement documenté, par exemple :
+```json
+(...)
+"naissance" : {
+                  "type" : "string",
+                  "description" : "Date de naissance",
+                  "pattern" : "yyyyMMdd"
+                },
+(...)
+```
+
+L'attribut du Bean concerné pourra être annoté avec un [Custom Validator](./json-validation/src/main/java/fr/dva/model/validation/ValidDateValidator.java), par exemple [@ValidDate](./json-validation/src/main/java/fr/dva/model/validation/ValidDate.java).
 
 #### Validation
 
