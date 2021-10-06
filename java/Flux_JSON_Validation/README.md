@@ -166,10 +166,10 @@ Cette méthode à l'avantage de générer le schéma JSON correctement document�
 ```json
 (...)
 "naissance" : {
-                  "type" : "string",
-                  "description" : "Date de naissance",
-                  "pattern" : "yyyyMMdd"
-                },
+    "type" : "string",
+    "description" : "Date de naissance",
+    "pattern" : "yyyyMMdd"
+    },
 (...)
 ```
 
