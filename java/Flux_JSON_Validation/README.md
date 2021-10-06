@@ -158,8 +158,7 @@ Le format d'échange JSON ne gère pas le type de données date, alors qu'il est
 Par ailleurs, la JSR 303 (Validation API) ne fournit pas nativement de méthode de validation des dates.
 
 Partant de ce constat, il est possible :
-
--de typer les propriétés représentant des dates en java.lang.String, ce qui permet de facto,
+- de typer les propriétés représentant des dates en java.lang.String, ce qui permet de facto,
 - d'utiliser l'annotation @Pattern(regex = "yyyyMMdd"}, avec une regex contenant un format de Date valide
 
 Cette méthode à l'avantage de générer le schéma JSON correctement documenté, par exemple :
