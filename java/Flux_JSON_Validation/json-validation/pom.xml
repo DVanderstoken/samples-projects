@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.5.4</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>fr.dva</groupId>
+	<artifactId>json-validation</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>json-validation</name>
+	<description>Exemple de validation JSON avec utilisation de JSONSchema</description>
+	<properties>
+		<java.version>8</java.version>
+		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<!-- Utils: Jakson libraries : - Data bindings - Date and Time API JSON 
+			binding -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+		</dependency>
+
+		<!-- Utils: validation API -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.github.victools</groupId>
+				<artifactId>jsonschema-maven-plugin</artifactId>
+				<version>4.20.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<classNames>fr.dva.model.Librairie</classNames>
+					<schemaFilePath>src/main/resources/schemas</schemaFilePath>
+					<schemaFileName>{0}.schema.json</schemaFileName>
+					<schemaVersion>DRAFT_2019_09</schemaVersion>
+					<options>
+						<preset>PLAIN_JSON</preset>
+						<enabled>
+							<option>PLAIN_DEFINITION_KEYS</option>
+							<option>SCHEMA_VERSION_INDICATOR</option>
+							<option>FORBIDDEN_ADDITIONAL_PROPERTIES_BY_DEFAULT</option>
+						</enabled>
+					</options>
+					<modules>
+						<module>
+							<name>Jackson</name>
+							<options>
+								<option>RESPECT_JSONPROPERTY_REQUIRED</option>
+								<option>FLATTENED_ENUMS_FROM_JSONVALUE</option>
+							</options>
+						</module>
+						<module>
+							<name>JavaxValidation</name>
+							<options>
+								<option>INCLUDE_PATTERN_EXPRESSIONS</option>
+							</options>
+						</module>
+					</modules>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>src/main/resources</directory>
+							<includes>
+								<include>schemas</include>
+							</includes>
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<!-- downgrade plugin version for UMLGraph Doclet -->
+				<version>2.10.4</version>
+				<configuration>
+					<minmemory>128m</minmemory>
+					<maxmemory>512m</maxmemory>
+					<source>1.8</source>
+					<show>private</show>
+					<aggregate>true</aggregate>
+					<doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
+
+					<!-- <docletPath>/path/to/UmlGraph.jar</docletPath> -->
+					<docletArtifact>
+						<groupId>org.umlgraph</groupId>
+						<artifactId>umlgraph</artifactId>
+						<version>5.6.6</version>
+					</docletArtifact>
+					<additionalparam>
+						-qualify
+						-attributes
+						-visibility
+						-types
+						-enumerations
+						-enumconstants
+						-inferrel
+						-inferdep
+						-hide java.*
+						-nodefontsize 9
+						-nodefontpackagesize 7
+					</additionalparam>
+					<useStandardDocletOptions>true</useStandardDocletOptions>
+					<reports>
+						<report>javadoc</report>
+					</reports>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!-- reporting> <plugins> <plugin> <groupId>org.apache.maven.plugins</groupId> 
+		<artifactId>maven-site-plugin</artifactId> <version>3.9.1</version> <inherited>false</inherited> 
+		<configuration> <reportPlugins> <plugin> <groupId>org.apache.maven.plugins</groupId> 
+		<artifactId>maven-javadoc-plugin</artifactId> <version>3.3.1</version> <configuration> 
+		<show>public</show> <quiet>true</quiet> <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet> 
+		<docletArtifact> <groupId>org.umlgraph</groupId> <artifactId>umlgraph</artifactId> 
+		<version>5.6.6</version> </docletArtifact> <useStandardDocletOptions>true</useStandardDocletOptions> 
+		<additionalparam> -inferrel -inferdep -quiet -hide java.* -hide org.eclipse.* 
+		-collpackages java.util.* -postfixpackage -nodefontsize 9 -nodefontpackagesize 
+		7 -attributes -types -visibility -operations -constructors -enumerations 
+		-enumconstants -views </additionalparam> </configuration> <reportSets> <reportSet> 
+		<reports> <report>aggregate</report> </reports> </reportSet> </reportSets> 
+		</plugin> </reportPlugins> </configuration> </plugin> </plugins> </reporting -->
+
+</project>

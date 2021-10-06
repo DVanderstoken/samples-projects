@@ -1,0 +1,210 @@
+{
+  "$schema" : "https://json-schema.org/draft/2019-09/schema",
+  "$defs" : {
+    "Collection" : {
+      "type" : "object",
+      "properties" : {
+        "collectionParent" : {
+          "$ref" : "#/$defs/Collection",
+          "description" : "Collection parent"
+        },
+        "nom" : {
+          "type" : "string",
+          "description" : "Nom de la collection"
+        }
+      },
+      "required" : [ "nom" ],
+      "description" : "Representation d'une collection.",
+      "additionalProperties" : false
+    },
+    "Editeur" : {
+      "type" : "object",
+      "properties" : {
+        "collections" : {
+          "description" : "Liste des collections d'ouvrages de la maison d'edition",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/$defs/Collection"
+          }
+        },
+        "coordonnees" : {
+          "allOf" : [ {
+            "type" : "object",
+            "properties" : {
+              "adresse" : {
+                "allOf" : [ {
+                  "type" : "object",
+                  "properties" : {
+                    "ligne1" : {
+                      "type" : "string",
+                      "description" : "Qualite, prenom et nom. Eventuellement titre ou profession"
+                    },
+                    "ligne2" : {
+                      "type" : "string",
+                      "description" : "Numero de boite aux lettres ou appartement, ou Chez ..., ou Escalier, etage"
+                    },
+                    "ligne3" : {
+                      "type" : "string",
+                      "description" : "Entree, Tour, Imeuble, Batiment, Residence, Zone Industrielle, ..."
+                    },
+                    "ligne4" : {
+                      "type" : "string",
+                      "description" : "Numero de la voie, type et nom de la voie"
+                    },
+                    "ligne5" : {
+                      "type" : "string",
+                      "description" : "Lieu dit, ou Service particulier de distribution (BP)"
+                    },
+                    "ligne6" : {
+                      "type" : "string",
+                      "description" : "Code postal et localite de destination",
+                      "pattern" : "\\d{5}\\s\\w+"
+                    }
+                  },
+                  "required" : [ "ligne1", "ligne4", "ligne6" ],
+                  "description" : "Representation d'une adresse.",
+                  "additionalProperties" : false
+                }, {
+                  "description" : "Adresse de contact"
+                } ]
+              },
+              "adressesMails" : {
+                "description" : "Adresse(s) mail(s) de contact",
+                "type" : "array",
+                "items" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "required" : [ "adresse" ],
+            "description" : "Representation de coordoonnees.",
+            "additionalProperties" : false
+          }, {
+            "description" : "Coorodnnees de la maison d'edition"
+          } ]
+        },
+        "logo" : {
+          "description" : "logo de la maison d'edition",
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "maisonMere" : {
+          "$ref" : "#/$defs/Editeur",
+          "description" : "Maison mere"
+        },
+        "nom" : {
+          "type" : "string",
+          "description" : "Nom de l'editeur (de la maison d'edition)"
+        },
+        "webSiteURL" : {
+          "type" : "string",
+          "description" : "URL du site Internet de la maison d'edition"
+        }
+      },
+      "required" : [ "nom" ],
+      "description" : "Representation d'un editeur.",
+      "additionalProperties" : false
+    }
+  },
+  "type" : "object",
+  "properties" : {
+    "ouvrages" : {
+      "description" : "Bibliotheque",
+      "type" : "array",
+      "items" : {
+        "type" : "object",
+        "properties" : {
+          "EAN" : {
+            "type" : "string",
+            "description" : "Numero EAN (Code Barre)",
+            "pattern" : "\\d{8,18}"
+          },
+          "ISBN" : {
+            "type" : "string",
+            "description" : "Numero ISBN",
+            "pattern" : "\\d{3}-\\d-\\d{4}-\\d{4}-\\d"
+          },
+          "auteurs" : {
+            "description" : "Auteur(s)",
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "properties" : {
+                "biographie" : {
+                  "type" : "string",
+                  "description" : "Biographie"
+                },
+                "deces" : {
+                  "type" : "string",
+                  "description" : "Date de deces",
+                  "pattern" : "yyyyMMdd"
+                },
+                "naissance" : {
+                  "type" : "string",
+                  "description" : "Date de naissance",
+                  "pattern" : "yyyyMMdd"
+                },
+                "nationalite" : {
+                  "type" : "string",
+                  "enum" : [ "AFG", "ZAF", "ALA", "ALB", "DZA", "DEU", "AND", "AGO", "AIA", "ATA", "ATG", "SAU", "ARG", "ARM", "ABW", "AUS", "AUT", "AZE", "BHS", "BHR", "BGD", "BRB", "BLR", "BEL", "BLZ", "BEN", "BMU", "BTN", "BOL", "BES", "BIH", "BWA", "BVT", "BRA", "BRN", "BGR", "BFA", "BDI", "CPV", "CYM", "KHM", "CMR", "CAN", "CHL", "CHN", "CXR", "CYP", "CCK", "COL", "COM", "COD", "COG", "COK", "KOR", "PRK", "CRI", "CIV", "HRV", "CUB", "CUW", "DNK", "DJI", "DOM", "DMA", "EGY", "SLV", "ARE", "ECU", "ERI", "ESP", "EST", "SWZ", "USA", "ETH", "FLK", "FRO", "FJI", "FIN", "FRA", "GAB", "GMB", "GEO", "SGS", "GHA", "GIB", "GRC", "GRD", "GRL", "GLP", "GUM", "GTM", "GGY", "GIN", "GNQ", "GNB", "GUY", "GUF", "HTI", "HMD", "HND", "HKG", "HUN", "IMN", "UMI", "IND", "IOT", "IDN", "IRN", "IRQ", "IRL", "ISL", "ISR", "ITA", "JAM", "JPN", "JEY", "JOR", "KAZ", "KEN", "KGZ", "KIR", "KWT", "LAO", "LSO", "LVA", "LBN", "LBR", "LBY", "LIE", "LTU", "LUX", "MAC", "MKD", "MDG", "MYS", "MWI", "MDV", "MLI", "MLT", "MNP", "MAR", "MHL", "MTQ", "MUS", "MRT", "MYT", "MEX", "FSM", "MDA", "MCO", "MNG", "MNE", "MSR", "MOZ", "MMR", "NAM", "NRU", "NPL", "NIC", "NER", "NGA", "NIU", "NFK", "NOR", "NCL", "NZL", "OMN", "UGA", "UZB", "PAK", "PLW", "PSE", "PAN", "PNG", "PRY", "NLD", "PER", "PHL", "PCN", "POL", "PYF", "PRI", "PRT", "QAT", "SYR", "CAF", "REU", "ROU", "GBR", "RUS", "RWA", "ESH", "BLM", "SHN", "LCA", "KNA", "SMR", "MAF", "SXM", "SPM", "VAT", "VCT", "SLB", "WSM", "ASM", "STP", "SEN", "SRB", "SYC", "SLE", "SGP", "SVK", "SVN", "SOM", "SDN", "SSD", "LKA", "SWE", "CHE", "SUR", "SJM", "TJK", "TWN", "TZA", "TCD", "CZE", "ATF", "THA", "TLS", "TGO", "TKL", "TON", "TTO", "TUN", "TKM", "TCA", "TUR", "TUV", "UKR", "URY", "VUT", "VEN", "VGB", "VIR", "VNM", "WLF", "YEM", "ZMB", "ZWE" ],
+                  "description" : "Pays de nationalite"
+                },
+                "nom" : {
+                  "type" : "string",
+                  "description" : "Nom"
+                },
+                "prenom" : {
+                  "type" : "string",
+                  "description" : "Prenom"
+                }
+              },
+              "required" : [ "nom" ],
+              "description" : "Representation d'un auteur.",
+              "additionalProperties" : false
+            }
+          },
+          "collection" : {
+            "$ref" : "#/$defs/Collection",
+            "description" : "Collection"
+          },
+          "editeur" : {
+            "$ref" : "#/$defs/Editeur",
+            "description" : "Editeur (ou edition)"
+          },
+          "parution" : {
+            "type" : "string",
+            "description" : "Date de parution",
+            "pattern" : "yyyyMMdd"
+          },
+          "premiereDeCouverture" : {
+            "description" : "Couverture",
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "reference" : {
+            "type" : "string",
+            "description" : "Reference (dans la collection)"
+          },
+          "resume" : {
+            "type" : "string",
+            "description" : "Resume"
+          },
+          "titre" : {
+            "type" : "string",
+            "description" : "Titre de l'ouvrage"
+          }
+        },
+        "required" : [ "ISBN", "editeur", "resume", "titre" ],
+        "description" : "Representation d'un ouvrage (d'un livre).",
+        "additionalProperties" : false
+      }
+    }
+  },
+  "required" : [ "ouvrages" ],
+  "description" : "Representation d'une librairie.",
+  "additionalProperties" : false
+}
