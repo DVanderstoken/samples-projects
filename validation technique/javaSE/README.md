@@ -39,5 +39,6 @@ Ecrire une méthode qui retourne une chaine de caractères inversée.
             }
         }
         return result;
+    }
 ```     
 L'appel `isValidDate("20211211", "uuuuMMdd")` retourne `true`
