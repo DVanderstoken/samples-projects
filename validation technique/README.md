@@ -11,7 +11,7 @@ Le QCM doit être réalisable dans le délai donné sans que le candidat puisse 
 - [Java SE](./javaSE/README.md)
 - Jakarta EE (Ex Java EE, ex J2EE)
 - [Spring](./spring/README.md)
-- REST
+- [REST](./REST/README.md)
 - Tooling
   - Git
   - [Maven](!./../Maven/README.md)
