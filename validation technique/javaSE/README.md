@@ -30,16 +30,21 @@ Ecrire une méthode qui retourne une chaine de caractères inversée.
 
 ```Java
     public boolean isValidDate(String date, String pattern) {
-        boolean result = true;
-        if (date != null) {
+		// default pessimistic result
+        boolean result = false;
+        if (null != date && null != pattern) {
             try {
                 LocalDate.parse((CharSequence) date, DateTimeFormatter.ofPattern(pattern).withResolverStyle(ResolverStyle.STRICT));
-            } catch (final DateTimeParseException dtpe) {
-                result = false;
+                result = true;
+            } catch (final DateTimeParseException error) {
+                // nothing to do here
             }
+        } else {
+        	throw new NullPointerException("Date parameter and / or pattern parameter must not be null");
         }
         return result;
-    }
+	}
 ```     
 L'appel `isValidDate("20211211", "uuuuMMdd")` retourne `true`
+
 L'appel `isValidDate("20210229", "uuuuMMdd")` retourne `false`
