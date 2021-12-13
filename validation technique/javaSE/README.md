@@ -42,3 +42,4 @@ Ecrire une méthode qui retourne une chaine de caractères inversée.
     }
 ```     
 L'appel `isValidDate("20211211", "uuuuMMdd")` retourne `true`
+L'appel `isValidDate("20210229", "uuuuMMdd")` retourne `false`
