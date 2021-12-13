@@ -29,20 +29,17 @@ Ecrire une méthode qui retourne une chaine de caractères inversée.
 ### Corrigé
 
 ```Java
-    public boolean isValidDate(String date, String pattern) {
-		// default pessimistic result
-        boolean result = false;
-        if (null != date && null != pattern) {
-            try {
-                LocalDate.parse((CharSequence) date, DateTimeFormatter.ofPattern(pattern).withResolverStyle(ResolverStyle.STRICT));
-                result = true;
-            } catch (final DateTimeParseException error) {
-                // nothing to do here
-            }
-        } else {
-        	throw new NullPointerException("Date parameter and / or pattern parameter must not be null");
-        }
-        return result;
+    /**
+	 * @param date,    la date à valider, sous forme de chaîne de caractères
+	 * @param pattern, le pattern utilisé pour valider la date, @see
+	 *                 java.time.format.DateTimeFormatter.
+	 * @return true si la date est valide au regard du pattern de validation
+	 * @throws DateTimeParseException si la date est invalide
+	 * @throws NullPointerException   si au moins un des deux paramètres est null.
+	 */
+	public boolean isValidDate(String date, String pattern) throws DateTimeParseException, NullPointerException {
+		LocalDate.parse((CharSequence) date, DateTimeFormatter.ofPattern(pattern).withResolverStyle(ResolverStyle.STRICT));
+		return true;
 	}
 ```     
 L'appel `isValidDate("20211211", "uuuuMMdd")` retourne `true`
