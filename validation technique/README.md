@@ -14,7 +14,7 @@ Le QCM doit être réalisable dans le délai donné sans que le candidat puisse 
 - [REST](./REST/README.md)
 - Tooling
   - Git
-  - [Maven](!./../Maven/README.md)
+  - [Maven](./Maven/README.md)
   - Gradle
   - CI
 
